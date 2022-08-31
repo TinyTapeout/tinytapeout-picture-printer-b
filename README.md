@@ -4,7 +4,7 @@
 
 This repo is an experiment in using Verilog source files instead of Wokwi diagrams for [TinyTapeout](https://tinytapeout.com), implementing a 5-bit PDM driver.
 
-The Verilog flow is:
+The Verilog flow is :
 
 1) Fork this Repo
 2) Create a [wokwi](https://wokwi.com/projects/339800239192932947) project to get an ID
