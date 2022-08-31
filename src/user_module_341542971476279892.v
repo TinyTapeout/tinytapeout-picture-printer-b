@@ -60,7 +60,7 @@ module logo_341542971476279892 (
   //picture data
 
   parameter LEN_lambdaRLE = 207;
-  parameter WIDTH_logoRLE = 41;
+  parameter WIDTH_lambdaRLE = 41;
   parameter START_lambdaRLE = 1;
   wire [7:0] lambdaRLE [0:LEN_lambdaRLE-1]; //Lambda symbol
   
