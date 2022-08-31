@@ -13,12 +13,7 @@ module user_module_341542971476279892(
     .clk(io_in[0]),    
     .reset(io_in[1]),
 
-    .img_sel(io_in[3:2]),
-    .enable_horizontal(io_in[4]),
-
-    .tx_out(io_out[0]),
-    .h_sync(io_out[1]),
-    .v_sync(io_out[2])
+    .tx_out(io_out[0])
   );
 
 endmodule
@@ -31,12 +26,8 @@ endmodule
 module logo_341542971476279892 (
     input clk,
     input reset,
-    input [1:0] img_sel, //4 images
-    input enable_horizontal, //enable lines
     
-    output reg tx_out,
-    output reg h_sync, //start of new line signal
-    output reg v_sync  //start of new frame signal
+    output reg tx_out
   );
 
   reg       [7:0] rle_segment_counter;
@@ -89,43 +80,10 @@ module logo_341542971476279892 (
 
     next_line_pixel_counter = line_pixel_counter;
 
-    //default, if(img_sel == 0) begin
-    /*current_rle_length     = logoRLE[rle_segment_counter];
-    current_rle_n_segments = LEN_logoRLE;
-    start_pixel = START_logoRLE;
-    img_width = WIDTH_logoRLE;
-
-    if(img_sel == 0) begin*/
     current_rle_length     = lambdaRLE[rle_segment_counter];
     current_rle_n_segments = LEN_lambdaRLE;
     start_pixel = START_lambdaRLE;
     img_width = WIDTH_lambdaRLE;
-    //end
-    /*
-    else if(img_sel == 2) begin
-      current_rle_length     = intRLE[rle_segment_counter];
-      current_rle_n_segments = LEN_intRLE;
-      start_pixel = START_intRLE;
-      img_width = WIDTH_intRLE;
-    end
-    *//*
-    else if(img_sel == 3) begin
-      current_rle_length     = amogusRLE[rle_segment_counter];
-      current_rle_n_segments = LEN_amogusRLE;
-      start_pixel = START_amogusRLE;
-      img_width = WIDTH_amogusRLE;
-    end*/
-    
-    
-    
-    h_sync = (line_pixel_counter == 0);
-    v_sync = (rle_segment_counter == 0) && (rle_pixel_counter == 0);
-    
-    if(line_pixel_counter < img_width-1) begin
-      next_line_pixel_counter = line_pixel_counter + 1;
-    end else begin
-      next_line_pixel_counter = 0;
-    end
     
     if(rle_pixel_counter < current_rle_length-1) begin
       next_rle_pixel_counter = rle_pixel_counter + 1;
@@ -142,10 +100,7 @@ module logo_341542971476279892 (
       end
     end
 
-
-
-    tx_out = enable_horizontal & ((line_pixel_counter == 0) | (line_pixel_counter == (img_width-1)));
-    tx_out = tx_out | rle_pixel_state;
+    tx_out = rle_pixel_state;
   end
 
 
