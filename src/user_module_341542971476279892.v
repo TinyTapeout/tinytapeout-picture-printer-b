@@ -120,20 +120,22 @@ module logo_341542971476279892 (
       current_rle_n_segments = LEN_lambdaRLE;
       start_pixel = START_lambdaRLE;
       img_width = WIDTH_lambdaRLE;
-    end else if(img_sel == 2) begin
+    end
+    /*
+    else if(img_sel == 2) begin
       current_rle_length     = intRLE[rle_segment_counter];
       current_rle_n_segments = LEN_intRLE;
       start_pixel = START_intRLE;
       img_width = WIDTH_intRLE;
     end
-    /*
+    */
     else if(img_sel == 3) begin
       current_rle_length     = amogusRLE[rle_segment_counter];
       current_rle_n_segments = LEN_amogusRLE;
       start_pixel = START_amogusRLE;
       img_width = WIDTH_amogusRLE;
     end
-    */
+    
     
     
     h_sync = (line_pixel_counter == 0);
