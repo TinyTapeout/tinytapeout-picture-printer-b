@@ -1,5 +1,8 @@
 ![](../../workflows/wokwi/badge.svg)
 
+Prints this the Edinburgh Hacklab logo pixel by pixel. The image is compressed with run length encoding. I am unsure if this made the silicon are smaller or not.
+![alt text](https://github.com/ElectricPotato/tinytapeout-picture-printer-b/blob/main/images/1_ehlab.png?raw=true)
+
 (Original readme for the template repository [here](https://github.com/mattvenn/wokwi-verilog-gds-test/blob/main/README.md))
 
 This repo is an experiment in using Verilog source files instead of Wokwi diagrams for [TinyTapeout](https://tinytapeout.com), implementing a 5-bit PDM driver.
