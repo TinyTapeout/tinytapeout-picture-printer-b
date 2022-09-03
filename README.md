@@ -1,17 +1,27 @@
 ![](../../workflows/wokwi/badge.svg)
 
-Prints this the Edinburgh Hacklab logo pixel by pixel. The image is compressed with run length encoding. I am unsure if this made the silicon are smaller or not.
+Prints this the [Edinburgh Hacklab](https://edinburghhacklab.com/) logo pixel by pixel, line by line, left to right, top to bottom. 1 pixel per clock cycle.
+Image is 41 by 41 pixels. 1 = black pixel, 0 = white pixel.
+
 ![alt text](https://github.com/ElectricPotato/tinytapeout-picture-printer-b/blob/main/images/1_ehlab.png?raw=true)
 
-(Original readme for the template repository [here](https://github.com/mattvenn/wokwi-verilog-gds-test/blob/main/README.md))
 
-This repo is an experiment in using Verilog source files instead of Wokwi diagrams for [TinyTapeout](https://tinytapeout.com), implementing a 5-bit PDM driver.
+## Pin list
+| Pin  | Function |
+|------|------|
+| in0  | CLK  |
+| in1  | Synchronous reset  |
+|------|--------------|
+| out0 | Pixel output |
 
-The Verilog flow is :
 
-1) Fork this Repo
-2) Create a [wokwi](https://wokwi.com/projects/339800239192932947) project to get an ID
-3) Update WOWKI_PROJECT_ID in Makefile
-4) `grep -rl "341542971476279892" ./src | sed -i "s/341542971476279892/YOUR_WOKWI_ID/g"` from the top of the repo to find and replace all occurences of the old ID in `src` with yours, and rename the `user_module`, `user_module_tb` and `scan_wrapper` files to use your ID
-5) Replace behavioural code in user_module_ID.v with your own, likewise change the testbench
-6) Push changes, which triggers the GitHub Action to build the project
+## Run Length Encoding
+
+The image is compressed with [run length encoding (RLE)](https://en.wikipedia.org/wiki/Run-length_encoding), I am unsure if this made the silicon are smaller or not.
+The conversion script is in the images/ directory.
+Example:
+  start with a black pixel and the list [41, 136, 3, 9, 3, ...], decodes to 41 black pixels, 136 white pixels, 3 black pixels, 9 white pixels, etc
+
+The design previously had horizontal and veritical sync signals, but I removed them in an attempt to get the design to fit.
+
+(Used the Tiny Tapeout [verilog template](https://github.com/H-S-S-11/tinytapeout-verilog-test))
